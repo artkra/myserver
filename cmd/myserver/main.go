@@ -70,6 +70,13 @@ func (g *Greeter) SayHello(ctx context.Context, r *pb.HelloRequest) (*pb.HelloRe
 	}, nil
 }
 
+// SayHello says hello
+func (g *Greeter) SayHelloAgain(ctx context.Context, r *pb.HelloRequest) (*pb.HelloReply, error) {
+	return &pb.HelloReply{
+		Message: fmt.Sprintf("Hello, again %s!", r.Name),
+	}, nil
+}
+
 func main() {
 	g := NewServer()
 	g.Start()

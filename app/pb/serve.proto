@@ -15,6 +15,12 @@ service Greeter {
         body: "*"
     };
   }
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/hello"
+      body: "*"
+  };
+}
 }
 
 // The request message containing the user's name.
