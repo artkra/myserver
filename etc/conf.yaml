@@ -1,0 +1,7 @@
+server:
+    http_port: 8090
+    grpc_port: 8080
+mongo:
+    user: herodotus
+    password: herodotus
+    db_name: herodotus
