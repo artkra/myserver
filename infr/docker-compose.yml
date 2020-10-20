@@ -1,0 +1,13 @@
+version: '3'
+services: 
+    mng:
+        image: 'mongo'
+        container_name: 'mng_cont'
+        environment: 
+            - MONGO_INITDB_DATABASE=herodotus
+            - MONGO_INITDB_ROOT_USERNAME=herodotus
+            - MONGO_INITDB_ROOT_PASSWORD=herodotus
+        volumes: 
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+        ports:
+            - '27017-27019:27017-27019'
