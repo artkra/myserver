@@ -13,6 +13,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+// TODO: 3. Enrich struct with mutex, models.Config instance, db connection, update channel
 type Greeter struct {
 	wg sync.WaitGroup
 	pb.UnimplementedGreeterServer
@@ -23,6 +24,8 @@ func NewServer() *Greeter {
 	return &Greeter{}
 }
 
+// TODO: 777. Ensure gracefull stop by signals.
+// TODO: 888. Add logging.
 // Start starts server
 func (g *Greeter) Start() {
 	g.wg.Add(1)
@@ -62,6 +65,7 @@ func (g *Greeter) startREST() error {
 	mux.HandlePath(
 		"GET", "/swagger", runtime.HandlerFunc(SwaggerUIHandler),
 	)
+	// TODO: 999. Figure out how to serve dir in gateway
 	mux.HandlePath(
 		"GET", "/swagger/swagger-ui-bundle.js", runtime.HandlerFunc(SwaggerUIHandler),
 	)

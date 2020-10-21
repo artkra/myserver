@@ -19,3 +19,9 @@ func (g *Greeter) SayHelloAgain(ctx context.Context, r *pb.HelloRequest) (*pb.He
 		Message: fmt.Sprintf("Hello, again %s!", r.Name),
 	}, nil
 }
+
+// TODO: 6. Implement handlers for CRUD operations over LineItems and creatives.
+// TODO: 7. In every CRUD operation update in-memory config
+// update data in mongo;
+// if success ->
+// push diff data to special channel 'chan<- models.Diff' (also a field of server)

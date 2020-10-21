@@ -1,8 +1,9 @@
-package structs
+package models
 
+// TODO: 1. Finish models
 type LineItem struct {
-	Name      string `json:"name"`
-	ID        int64  `json:"ID"`
+	ID        int64  `json:"id" db:"id"`
+	Name      string `json:"name" db:"name"`
 	Creatives []*Creative
 }
 
@@ -15,4 +16,5 @@ type Creative struct {
 
 type Config struct {
 	LineItems []*LineItem
+	Creatives []*Creative
 }
