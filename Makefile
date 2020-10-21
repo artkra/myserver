@@ -4,6 +4,10 @@ export GO111MODULE=on
 build:
 	go build -o bin/myserver cmd/myserver/main.go
 
+.PHONY: run
+run:
+	go run cmd/myserver/main.go
+
 .PHONY: generate-pb
 generate-pb:
 	go generate app/pb/gen.go

@@ -37,6 +37,7 @@ func (g *Greeter) Start() {
 	}()
 	g.wg.Wait()
 }
+
 func (g *Greeter) startGRPC() error {
 	lis, err := net.Listen("tcp", "localhost:8080")
 	if err != nil {
@@ -47,12 +48,35 @@ func (g *Greeter) startGRPC() error {
 	grpcServer.Serve(lis)
 	return nil
 }
+
 func (g *Greeter) startREST() error {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
 	mux := runtime.NewServeMux()
+
+	mux.HandlePath(
+		"GET", "/swagger.json", runtime.HandlerFunc(SwaggerJSONHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger", runtime.HandlerFunc(SwaggerUIHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger/swagger-ui-bundle.js", runtime.HandlerFunc(SwaggerUIHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger/swagger-ui-standalone-preset.js", runtime.HandlerFunc(SwaggerUIHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger/swagger-ui.css", runtime.HandlerFunc(SwaggerUIHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger/favicon-16x16.png", runtime.HandlerFunc(SwaggerUIHandler),
+	)
+	mux.HandlePath(
+		"GET", "/swagger/favicon-32x32.png", runtime.HandlerFunc(SwaggerUIHandler),
+	)
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	err := pb.RegisterGreeterHandlerFromEndpoint(ctx, mux, ":8080", opts)
 	if err != nil {
