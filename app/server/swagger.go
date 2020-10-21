@@ -16,7 +16,7 @@ const (
 func SwaggerJSONHandler(
 	w http.ResponseWriter, r *http.Request, pathParams map[string]string,
 ) {
-	http.ServeFile(w, r, "./swagger/swagger.json")
+	http.ServeFile(w, r, "./swagger/serve.swagger.json")
 }
 
 // SwaggerUIHandler(
